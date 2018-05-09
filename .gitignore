@@ -1,0 +1,13 @@
+# PHALCON
+/app/cache/
+!/app/cache/readme.md
+/public/upload/
+/element/
+/app/config/config.php
+
+/public/Games/
+/public/VN/
+
+# PROJECT
+sftp-config.json
+.htpasswd
