@@ -1,0 +1,15 @@
+body
+{
+	margin: 0px;
+}
+header
+{
+	padding: 5px;
+	background-color: #292b2c;
+	color: #fff;
+}
+h1
+{
+	font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+	margin-left: 15px;
+}
