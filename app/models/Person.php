@@ -10,23 +10,23 @@ class Person extends ModelBase
 		$this->setSource('people');
 
 		$this->hasManyToMany(
-		    "id",
-		    "ChildToParent",
-		    "child",
-		    'parent',
-		    'Person',
-		    'id',
-		    ['alias' => 'parents']
+			"id",
+			"ChildToParent",
+			"child",
+			'parent',
+			'Person',
+			'id',
+			['alias' => 'parents']
 		);
 
 		$this->hasManyToMany(
-		    "id",
-		    "ChildToParent",
-		    'parent',
-		    "child",
-		    'Person',
-		    'id',
-		    ['alias' => 'children']
+			"id",
+			"ChildToParent",
+			'parent',
+			"child",
+			'Person',
+			'id',
+			['alias' => 'children']
 		);
 	}
 
@@ -107,6 +107,6 @@ class Person extends ModelBase
 
 
 	public function __toString() {
-        return $this->id;
-    }
+		return $this->id;
+	}
 }

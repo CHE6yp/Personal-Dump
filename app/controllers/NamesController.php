@@ -2,6 +2,13 @@
 
 class NamesController extends ControllerBase
 {
+
+	public function initialize()
+	{
+		$this->view->setVar('title', "Генератор Имен");
+		$this->view->setVar('h1', "Генератор Имен");
+	}
+
 	public function indexAction()
 	{
 

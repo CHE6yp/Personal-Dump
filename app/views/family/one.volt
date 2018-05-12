@@ -1,4 +1,4 @@
-{% extends "layouts/familyTree.volt" %}
+{% extends "layouts/main.volt" %}
 
 {% block content %}
 	{% for personLevel in newAll %}

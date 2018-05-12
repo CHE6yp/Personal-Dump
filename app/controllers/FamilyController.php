@@ -2,6 +2,13 @@
 
 class FamilyController extends ControllerBase
 {
+
+	public function initialize()
+	{
+		$this->view->setVar('title', "Æрвдалтæ");
+		$this->view->setVar('h1', "Æрвдалтæ");
+	}
+
 	public function indexAction()
 	{
 
