@@ -1,4 +1,4 @@
-{% extends "layouts/namegen.volt" %}
+{% extends "layouts/main.volt" %}
 
 {% block content %}
 	<article>Итак, в текстбоксе пусть будет список имен через пробел. ПО РУССССКИ!</article>

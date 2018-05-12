@@ -1,4 +1,4 @@
-{% extends "layouts/vn.volt" %}
+{% extends "layouts/main.volt" %}
 
 {% block content %}
 	<h3>АУФФФ БЛЯ</h3>
