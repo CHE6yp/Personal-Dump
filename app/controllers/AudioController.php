@@ -19,6 +19,7 @@ class AudioController extends ControllerBase
 	public function trackAction($id = 1)
 	{
 		$track = AudioFiles::findFirstById($id);
+		$this->view->setVar('title',  "Audio: ".$track->name);
 		$this->view->setVar("track", $track);
 	}
 
