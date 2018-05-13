@@ -16,9 +16,10 @@ class AudioController extends ControllerBase
 	}
 
 
-	public function trackAction()
+	public function trackAction($id = 1)
 	{
-
+		$track = AudioFiles::findFirstById($id);
+		$this->view->setVar("track", $track);
 	}
 
 	public function uploadAction($value='')

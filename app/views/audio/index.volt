@@ -1,20 +1,23 @@
 {% extends "layouts/main.volt" %}
 
 {% block content %}
-	<h2>Все треки</h2>
-	<article>Четкий музонтий</article>
-	<ol>
-		{% for track in audioFiles %}
-		<li>
-			<span>{{track.name}}</span><br>
-			<audio controls>
-				<source src="/Audio/{{track.id}}.mp3" type="audio/mp3">
-				Your browser does not support the audio element.
-			</audio>
-		</li>
-		<br>
-		{% endfor %}
-	</ol>
+	<article>
+		<h2>Все треки</h2>
+		<p>Четкий музонтий</p>
+		<ol>
+			{% for track in audioFiles %}
+			<li>
+				<span>{{track.name}}</span><br>
+				<audio controls>
+					<source src="/Audio/{{track.id}}.mp3" type="audio/mp3">
+					Your browser does not support the audio element.
+				</audio>
+				<a href="/audio/track/{{track.id}}">-></a>
+			</li>
+			<br>
+			{% endfor %}
+		</ol>
+	</article>
 	<form id="uploadSong" action="/audio/upload" method="POST" enctype="multipart/form-data">
 		<h2>Загрузить трек</h2>
 		<input type="text" name="name" required> - имя трека<br><br>

@@ -22,10 +22,11 @@ a.logo, a.logo:visited
 	font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 	font-size: 24px;
 	color: #1496E1;
+	text-decoration: none;
 }
-.content
+article
 {
-	padding-left: 30px;
+	padding-left: 30px; 
 }
 form
 {
@@ -33,6 +34,7 @@ form
 	background-color: #1496E1;
 	color: #fff;
 	padding: 15px;
+	padding-left: 45px;
 	width: 300px;
 	border-radius: 0px 15px 15px 0px;
 }
