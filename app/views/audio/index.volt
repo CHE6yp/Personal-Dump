@@ -18,7 +18,7 @@
 			{% endfor %}
 		</ol>
 	</article>
-	<form id="uploadSong" action="/audio/upload" method="POST" enctype="multipart/form-data">
+	<form class="add-track" id="uploadSong" action="/audio/upload" method="POST" enctype="multipart/form-data">
 		<h2>Загрузить трек</h2>
 		<input type="text" name="name" required> - имя трека<br><br>
 		<input type="file" name="file" id="fileToUpload" required><br><br>

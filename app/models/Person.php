@@ -66,6 +66,14 @@ class Person extends ModelBase
 		return $children;
 	}
 
+	public function getPicture()
+	{
+		if (file_exists("/var/www/html/public/images/people/{$this->id}.jpg"))
+			return "/images/people/{$this->id}.jpg";
+		else
+			return "/images/people/person-placeholder.jpg";
+	}
+
 	public function getRelativeRecursive($depth,$count = 0)
 	{
 		$count++;

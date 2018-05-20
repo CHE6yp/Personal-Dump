@@ -1,12 +1,39 @@
 {% extends "layouts/main.volt" %}
 
 {% block content %}
-	{% for personLevel in newAll %}
-		<div>
-			{% for person in personLevel %}
-				{% include "family/inc/person.volt" %}
+
+	<h2>Подробно</h2>
+	{% include "family/inc/person.volt" %}
+
+
+	<h2>Родители</h2>
+	{% if father %}
+		{% set person = father %}
+		{% include "family/inc/person.volt" %}
+	{% endif %}
+
+	{% if mother %}
+		{% set person = mother %}
+		{% include "family/inc/person.volt" %}
+	{% endif %}
+
+	<br>
+	<h2>Дети</h2>
+
+	{% for children in childrenByParents %}
+		{% if children.parent %}
+			{% set person = children.parent %}
+			{% include "family/inc/person.volt" %}
+		{% endif %}	
+		<br>
+		<div style="background-color: #90ff23;">
+			{% for key,person in children %}
+				{% if key !== 'parent' %}
+					{% include "family/inc/person.volt" %}
+				{% endif %}
 			{% endfor %}
 		</div>
+		<br>
 	{% endfor %}
 
 	<br><br>
