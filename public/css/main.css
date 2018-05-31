@@ -7,9 +7,34 @@ header
 	padding: 5px;
 	background-color: #292b2c;
 	color: #fff;
+	padding-top: 15px;
+	height: 60px;
 }
 h1
 {
 	font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-	margin-left: 15px;
+	margin-left: 30%;
+	display:inline;
+	color: #fff;
+}
+a.logo, a.logo:visited
+{
+	font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+	font-size: 24px;
+	color: #1496E1;
+	text-decoration: none;
+}
+article
+{
+	padding-left: 30px;
+}
+form.add-track
+{
+	font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+	background-color: #1496E1;
+	color: #fff;
+	padding: 15px;
+	padding-left: 45px;
+	width: 300px;
+	border-radius: 0px 15px 15px 0px;
 }

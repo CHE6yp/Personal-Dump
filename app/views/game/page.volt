@@ -1,4 +1,4 @@
-{% extends "layouts/vn.volt" %}
+{% extends "layouts/main.volt" %}
 
 {% block content %}
 	<a href="/game/page?id=1"><<-- Бля, давай заново!</a><br>

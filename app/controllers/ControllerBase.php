@@ -19,6 +19,12 @@ class ControllerBase extends Controller
 	// 		$this->jsonResult(['result'=>'error','msg'=>'not found']);
 	// 	}
 	// }
+	
+	public function initialize()
+	{
+		$this->view->setVar('title', "CHE6yp");
+		$this->view->setVar('h1', "Главная");
+	}
 
 	public function jsonResult($data)
 	{
@@ -28,19 +34,18 @@ class ControllerBase extends Controller
 	}
 
 	public function mbStringToArray ($string) { 
-	    $strlen = mb_strlen($string); 
-	    while ($strlen) { 
-	        $array[] = mb_substr($string,0,1,"UTF-8"); 
-	        $string = mb_substr($string,1,$strlen,"UTF-8"); 
-	        $strlen = mb_strlen($string); 
-	    } 
-	    return $array; 
+		$strlen = mb_strlen($string); 
+		while ($strlen) { 
+			$array[] = mb_substr($string,0,1,"UTF-8"); 
+			$string = mb_substr($string,1,$strlen,"UTF-8"); 
+			$strlen = mb_strlen($string); 
+		} 
+		return $array; 
 	}
 
 	function mb_ucfirst($text) {
-	    return mb_strtoupper(mb_substr($text, 0, 1)) . mb_substr($text, 1);
+		return mb_strtoupper(mb_substr($text, 0, 1)) . mb_substr($text, 1);
 	}
-
 }
 
 ?>

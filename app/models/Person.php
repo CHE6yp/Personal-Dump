@@ -10,23 +10,23 @@ class Person extends ModelBase
 		$this->setSource('people');
 
 		$this->hasManyToMany(
-		    "id",
-		    "ChildToParent",
-		    "child",
-		    'parent',
-		    'Person',
-		    'id',
-		    ['alias' => 'parents']
+			"id",
+			"ChildToParent",
+			"child",
+			'parent',
+			'Person',
+			'id',
+			['alias' => 'parents']
 		);
 
 		$this->hasManyToMany(
-		    "id",
-		    "ChildToParent",
-		    'parent',
-		    "child",
-		    'Person',
-		    'id',
-		    ['alias' => 'children']
+			"id",
+			"ChildToParent",
+			'parent',
+			"child",
+			'Person',
+			'id',
+			['alias' => 'children']
 		);
 	}
 
@@ -64,6 +64,14 @@ class Person extends ModelBase
 			$children[] = $child;
 
 		return $children;
+	}
+
+	public function getPicture()
+	{
+		if (file_exists("/var/www/html/public/images/people/{$this->id}.jpg"))
+			return "/images/people/{$this->id}.jpg";
+		else
+			return "/images/people/person-placeholder.jpg";
 	}
 
 	public function getRelativeRecursive($depth,$count = 0)
@@ -107,6 +115,6 @@ class Person extends ModelBase
 
 
 	public function __toString() {
-        return $this->id;
-    }
+		return $this->id;
+	}
 }

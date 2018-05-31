@@ -1,4 +1,4 @@
-{% extends "layouts/namegen.volt" %}
+{% extends "layouts/main.volt" %}
 
 {% block content %}
 

@@ -8,6 +8,8 @@
 /public/Audio/
 /public/Games/
 /public/VN/
+/public/images/
+
 
 # PROJECT
 sftp-config.json

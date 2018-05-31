@@ -6,10 +6,10 @@ class Page extends ModelBase
 	{
 		$this->setSource('page');
 		$this->hasMany(
-		    "id",
-            "Option",
-            "pageId",
-            ['alias' => 'options']
-        );
+			"id",
+			"Option",
+			"pageId",
+			['alias' => 'options']
+		);
 	}
 }

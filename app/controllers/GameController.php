@@ -2,6 +2,12 @@
 
 class GameController extends ControllerBase
 {
+
+	public function initialize()
+	{
+		$this->view->setVar('title', "Visual Novel");
+		$this->view->setVar('h1', "Visual Novel");
+	}
 	public function indexAction()
 	{
 
