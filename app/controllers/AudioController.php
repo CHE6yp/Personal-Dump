@@ -57,4 +57,9 @@ class AudioController extends ControllerBase
 		$response = new Response();
 		return $response->redirect("/audio");
 	}
+
+	public function videoTempAction()
+	{
+
+	}
 }
