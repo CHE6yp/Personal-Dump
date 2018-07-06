@@ -25,8 +25,8 @@
 		<input type="submit" name="submit">
 	</form>
 
-
-	<script type="text/javascript">
+	<script type="text/javascript" src="/js/audio.js"></script>
+	<script type="text/javascript" >
 		// $("#uploadSong").submit(function(e) {
 		// 		var url = "/audio/upload"; // the script where you handle the form input.
 
