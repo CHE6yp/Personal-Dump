@@ -6,15 +6,7 @@ $( document ).ready(function() {
 		$(value).on("play",function (event) {
 
 			event.preventDefault();
-			// $.each($("audio"), function (key, track)
-			// {
-			// 	if (track != event.currentTarget)
-			// 	{
-			// 		track.pause();
-			// 	}
-			// })
-			// console.log(currentTrack);
-			// console.log(event.currentTarget);
+
 			if (currentTrack!=undefined && currentTrack!=event.currentTarget)
 			{
 				currentTrack.pause();
