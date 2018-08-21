@@ -3,10 +3,16 @@
 {% block content %}
 
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!-- https://api.hearthstonejson.com/v1/25770/ruRU/cards.json
+	https://art.hearthstonejson.com/v1/render/latest/frFR/512x/EX1_001.png -->
+	<h2>Пиздатая база карт по ХС</h2>
 	<article>
 		<div id="app">
-			<p>${ message }<span v-if="message == 'help'">: ПШЕЛ ТЫ НННАХЕР, КЗЬЕЛ!</span></p>
-			<input type="text" name="mes" v-model="message">
+			<p>Напиши например "Павший герой" или "Авиана"!</p>
+
+			<input type="text" name="mes" v-model="message" placeholder="Суккуб">
+			<div v-if="getText(message)"><h3>${ message }</h3> <p>${ currentCard.flavor }<p><img :src="getImage(currentCard.id) "></div>
 		</div>
 	</article>
 
@@ -15,11 +21,65 @@
 			delimiters: ['${', '}'],
 			el: '#app',
 			data: {
-				message: 'Hello Vue!'
+				message: '',
+				jsones: '',
+				info: '',
+				infoOpt: {},
+				currentCard: ''
+			},
+			methods:
+			{
+				getText(argument)
+				{
+					var index = this.findWithAttr('name', argument);
+					if (index == -1)
+						return false;
+					this.currentCard = this.infoOpt[argument[0]][index];
+					return true;
+				},
+				findWithAttr(attr, value) {
+					if (typeof this.infoOpt[value[0]] == 'undefined')
+						return -1;
+				    for(var i = 0; i < this.infoOpt[value[0]].length; i += 1) {
+				        if(this.infoOpt[value[0]][i][attr] == value) {
+				            return i;
+				        }
+				    }
+				    return -1;
+				},
+				getImage(id) {
+					return "https://art.hearthstonejson.com/v1/render/latest/ruRU/256x/"+ id +".png";
+				},
+				optimizeArray() {
+					for(let element of this.info)
+					{
+						if(element.id == 'PlaceholderCard')
+							continue;
+						if (typeof this.infoOpt[element['name'][0]] == 'undefined')
+							this.infoOpt[element['name'][0]] = [];
+						this.infoOpt[element['name'][0]].push(element);
+					}
+					// for(var i = 0; i < this.info.length - 1; i ++) {
+					// 	if(this.info[i].id == 'PlaceholderCard')
+					// 		continue;
+					// 	if (typeof this.infoOpt[this.info[i]['name'][0]] == 'undefined')
+					// 		this.infoOpt[this.info[i]['name'][0]] = [];
+					// 	this.infoOpt[this.info[i]['name'][0]].push(this.info[i]);
+				 //    };
+				    console.log(this.infoOpt);
+				}
+			},
+			mounted () {
+				axios
+					.get('https://api.hearthstonejson.com/v1/25770/ruRU/cards.json')
+					.then(response => {this.info = response.data; this.optimizeArray();});
 			}
 		});
 	</script>
+
+
 =====================================
+<!--
 <div id="app-7">
   <ol>
     <!--
@@ -27,7 +87,7 @@
       it's representing, so that its content can be dynamic.
       We also need to provide each component with a "key",
       which will be explained later.
-    -->
+    --
     <todo-item
       v-for="item in groceryList"
       v-bind:todo="item"
@@ -39,7 +99,7 @@
 <script type="text/javascript">
 	Vue.component('todo-item', {
 	  props: ['todo'],
-	  template: '<li> ${ todo.text } </li>'
+	  template: '<li> \${ todo.text } </li>'
 	})
 
 	var app7 = new Vue({
@@ -54,7 +114,7 @@
 	  }
 	});
 </script>
-
+-->
 
 
 
