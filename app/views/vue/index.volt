@@ -108,42 +108,49 @@
 
 
 =====================================
-<!--
+
 <div id="app-7">
   <ol>
-    <!--
-      Now we provide each todo-item with the todo object
+
+      <!-- Now we provide each todo-item with the todo object
       it's representing, so that its content can be dynamic.
       We also need to provide each component with a "key",
-      which will be explained later.
-    --
+      which will be explained later. -->
     <todo-item
       v-for="item in groceryList"
       v-bind:todo="item"
       v-bind:key="item.id">
     </todo-item>
   </ol>
+  <input type="text" name="todo" v-model="newItem" @keyup.enter="addString()">
 </div>
 
 <script type="text/javascript">
 	Vue.component('todo-item', {
 	  props: ['todo'],
-	  template: '<li> \${ todo.text } </li>'
+	  template: '<li> {{ "{{todo.text}}" }} </li>'
 	})
 
 	var app7 = new Vue({
-	  delimiters: ['${', '}'],
+	  //delimiters: ['${', '}'],
 	  el: '#app-7',
 	  data: {
 	    groceryList: [
 	      { id: 0, text: 'Vegetables' },
 	      { id: 1, text: 'Cheese' },
 	      { id: 2, text: 'Whatever else humans are supposed to eat' }
-	    ]
+	    ],
+	    newItem: ''
+	  },
+	  methods: {
+	  	addString(){
+	  		this.groceryList.push({id: 0, text: this.newItem});
+	  		this.newItem = '';
+	  	}
 	  }
 	});
 </script>
--->
+
 
 
 
