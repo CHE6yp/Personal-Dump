@@ -9,6 +9,10 @@
 	<h2>Пиздатая база карт по ХС</h2>
 	<article>
 		<div id="app">
+			<select v-model="lang">
+				<option value="ruRU">Русский</option>
+				<option value="enUS">English</option>
+			</select>
 			<p>Напиши например "Павший герой" или "Авиана"!</p>
 
 			<input type="text" name="mes" v-model="message" placeholder="Суккуб">
@@ -24,6 +28,7 @@
 				message: '',
 				jsones: '',
 				info: '',
+				lang: 'ruRU',
 				infoOpt: {},
 				currentCard: ''
 			},
@@ -48,7 +53,7 @@
 				    return -1;
 				},
 				getImage(id) {
-					return "https://art.hearthstonejson.com/v1/render/latest/ruRU/256x/"+ id +".png";
+					return "https://art.hearthstonejson.com/v1/render/latest/"+this.lang+"/256x/"+ id +".png";
 				},
 				optimizeArray() {
 					for(let element of this.info)
@@ -71,7 +76,7 @@
 			},
 			mounted () {
 				axios
-					.get('https://api.hearthstonejson.com/v1/25770/ruRU/cards.json')
+					.get('https://api.hearthstonejson.com/v1/25770/'+this.lang+'/cards.json')
 					.then(response => {this.info = response.data; this.optimizeArray();});
 			}
 		});
