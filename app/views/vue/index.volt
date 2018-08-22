@@ -9,9 +9,21 @@
 	<h2>Пиздатая база карт по ХС</h2>
 	<article>
 		<div id="app">
-			<select v-model="lang">
+			<select v-model="lang" >
 				<option value="ruRU">Русский</option>
 				<option value="enUS">English</option>
+				<option value="deDE">Немецкий</option>
+				<option value="esES">Испанский</option>
+				<option value="esMX">Мексиканский?</option>
+				<option value="frFR">Французский</option>
+				<option value="itIT">ИТАЛЬЯЯЯНО</option>
+				<option value="jaJP">НРТООООООО</option>
+				<option value="koKR">Корейский</option>
+				<option value="plPL">Курwa</option>
+				<option value="ptBR">ptBR</option>
+				<option value="thTH">thTH</option>
+				<option value="zhCN">zhCN</option>
+				<option value="zhTW">zhTW</option>
 			</select>
 			<p>Напиши например "Павший герой" или "Авиана"!</p>
 
@@ -30,18 +42,23 @@
 				info: '',
 				lang: 'ruRU',
 				infoOpt: {},
-				currentCard: ''
+				currentCard: false
 			},
 			methods:
 			{
 				getText(argument)
 				{
+					console.log(this.currentCard);
 					var index = this.findWithAttr('name', argument);
 					if (index == -1)
-						return false;
+						{
+							this.currentCard = false;
+							return false;
+						}
 					this.currentCard = this.infoOpt[argument[0]][index];
 					return true;
 				},
+				//неправильно, работает только с именами
 				findWithAttr(attr, value) {
 					if (typeof this.infoOpt[value[0]] == 'undefined')
 						return -1;
@@ -56,6 +73,7 @@
 					return "https://art.hearthstonejson.com/v1/render/latest/"+this.lang+"/256x/"+ id +".png";
 				},
 				optimizeArray() {
+					this.infoOpt = [];
 					for(let element of this.info)
 					{
 						if(element.id == 'PlaceholderCard')
@@ -64,20 +82,26 @@
 							this.infoOpt[element['name'][0]] = [];
 						this.infoOpt[element['name'][0]].push(element);
 					}
-					// for(var i = 0; i < this.info.length - 1; i ++) {
-					// 	if(this.info[i].id == 'PlaceholderCard')
-					// 		continue;
-					// 	if (typeof this.infoOpt[this.info[i]['name'][0]] == 'undefined')
-					// 		this.infoOpt[this.info[i]['name'][0]] = [];
-					// 	this.infoOpt[this.info[i]['name'][0]].push(this.info[i]);
-				 //    };
 				    console.log(this.infoOpt);
+				},
+				changeLang(){
+					if (this.currentCard!=false)
+					{
+						var cardId = this.currentCard.id;
+						this.getCardBase();
+						this.message = this.infoOptthis.findWithAttr('id', cardId);
+
+
+					}
+				},
+				getCardBase(){
+					axios
+						.get('https://api.hearthstonejson.com/v1/25770/'+this.lang+'/cards.json')
+						.then(response => {this.info = response.data; this.optimizeArray();});
 				}
 			},
 			mounted () {
-				axios
-					.get('https://api.hearthstonejson.com/v1/25770/'+this.lang+'/cards.json')
-					.then(response => {this.info = response.data; this.optimizeArray();});
+				this.getCardBase();
 			}
 		});
 	</script>
