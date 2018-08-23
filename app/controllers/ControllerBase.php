@@ -19,11 +19,15 @@ class ControllerBase extends Controller
 	// 		$this->jsonResult(['result'=>'error','msg'=>'not found']);
 	// 	}
 	// }
-	
+
+	public static $authUser = null;
+
+
 	public function initialize()
 	{
 		$this->view->setVar('title', "CHE6yp");
 		$this->view->setVar('h1', "Главная");
+		$this->view->setVar('authUser', self::$authUser);
 	}
 
 	public function jsonResult($data)
@@ -33,14 +37,14 @@ class ControllerBase extends Controller
 		return;
 	}
 
-	public function mbStringToArray ($string) { 
-		$strlen = mb_strlen($string); 
-		while ($strlen) { 
-			$array[] = mb_substr($string,0,1,"UTF-8"); 
-			$string = mb_substr($string,1,$strlen,"UTF-8"); 
-			$strlen = mb_strlen($string); 
-		} 
-		return $array; 
+	public function mbStringToArray ($string) {
+		$strlen = mb_strlen($string);
+		while ($strlen) {
+			$array[] = mb_substr($string,0,1,"UTF-8");
+			$string = mb_substr($string,1,$strlen,"UTF-8");
+			$strlen = mb_strlen($string);
+		}
+		return $array;
 	}
 
 	function mb_ucfirst($text) {
