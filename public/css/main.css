@@ -4,16 +4,17 @@ body
 }
 header
 {
-	padding: 5px;
+	padding: 0 20px;
 	background-color: #292b2c;
 	color: #fff;
-	padding-top: 15px;
 	height: 60px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 h1
 {
 	font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-	margin-left: 30%;
 	display:inline;
 	color: #fff;
 }

@@ -4,6 +4,7 @@ class IndexController extends ControllerBase
 {
 	public function indexAction()
 	{
+
 		echo 'Index';
 
 
@@ -16,7 +17,7 @@ class IndexController extends ControllerBase
 		$page = Page::findFirstById($pageId);
 		// if (!$page)
 		// 	exit 'NO PAGE';
-		$this->view->setVar("page", $page); 
+		$this->view->setVar("page", $page);
 	}
 
 	public function notfoundAction()

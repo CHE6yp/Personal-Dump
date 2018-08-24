@@ -3,7 +3,6 @@ use Phalcon\Http\Response;
 
 class AuthController extends ControllerBase
 {
-
     public function formAction()
     {
 
@@ -96,7 +95,6 @@ class AuthController extends ControllerBase
                 $this->flashSession->error("wrong user / password");
             } else {
                 $sessions->set("authUser", $user);
-                self::$authUser = $user;
                 $response = new Response();
                 $response->redirect("/");
                 $response->send();

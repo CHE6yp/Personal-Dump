@@ -7,9 +7,9 @@
 </head>
 <body>
 	<header>
-		<a class="logo" href="/" >Personal Dump</a><h1>{{h1}}</h1>
-
-		{{ (authUser == null)? '<a style="position: absolute;right: 10px;top: 25px;" class="logo" href="/auth/login/">Login</a>': authUser.username }}
+		<a class="logo" href="/" >Personal Dump</a>
+		<h1>{{h1}}</h1>
+		<a class="logo" href="/auth/login/"> {{ (authUser == null)? 'Login': authUser.username }}</a>
 	</header>
 
 <div class="content">

@@ -6,6 +6,7 @@ class FamilyController extends ControllerBase
 
 	public function initialize()
 	{
+        parent::initialize();
 		$this->view->setVar('title', "Æрвдалтæ");
 		$this->view->setVar('h1', "Æрвдалтæ");
 	}
@@ -108,7 +109,7 @@ class FamilyController extends ControllerBase
 		$depth = $this->request->get('d');
 		$person = Person::findFirstById($id);
 
-		
+
 		$father = Person::findFirstById($person->father);
 		$mother = Person::findFirstById($person->mother);
 
@@ -118,7 +119,7 @@ class FamilyController extends ControllerBase
 		if ($children!=[])
 		{
 			$genderRole = ($person->gender == 'm')? 'mother':'father';
-			foreach ($children as $child) 
+			foreach ($children as $child)
 			{
 				if (empty($child->$genderRole))
 				{
@@ -162,7 +163,7 @@ class FamilyController extends ControllerBase
 
 		$peopleArr = [];
 		//{ key: 0, n: "Aaron", s: "M", m:-10, f:-11, ux: 1, a: ["C", "F", "K"] },
-		foreach ($people as $key =>$person) 
+		foreach ($people as $key =>$person)
 		{
 			$personArr = new \stdClass;
 			$personArr->key = $person->id;

@@ -5,6 +5,7 @@ class VideoController extends ControllerBase
 {
 	public function initialize()
 	{
+		parent::initialize();
 		$this->view->setVar('title', "Video");
 		$this->view->setVar('h1', "Video");
 	}
@@ -32,9 +33,9 @@ class VideoController extends ControllerBase
 	public function uploadAction($value='')
 	{
 		$name = '';
-		if ($this->request->hasFiles() == true) 
+		if ($this->request->hasFiles() == true)
 		{
-			foreach ($this->request->getUploadedFiles() as $file) 
+			foreach ($this->request->getUploadedFiles() as $file)
 			{
 				$aFile = new AudioFiles();
 				$aFile->name = $this->request->get('name');
@@ -50,7 +51,7 @@ class VideoController extends ControllerBase
 				}
 
 				$f = $file->moveTo('/var/www/html/public/Audio/'.$aFile->id.".mp3");
-				echo $file->getError()."<br>"; 
+				echo $file->getError()."<br>";
 				echo $file->getName();
 			}
 		}

@@ -5,6 +5,7 @@ class GameController extends ControllerBase
 
 	public function initialize()
 	{
+        parent::initialize();
 		$this->view->setVar('title', "Visual Novel");
 		$this->view->setVar('h1', "Visual Novel");
 	}
@@ -14,7 +15,7 @@ class GameController extends ControllerBase
 		// $page = Page::findFirstById($id);
 		// if (!$page)
 		// 	exit ('NO PAGE!');
-		// $this->view->setVar("page", $page); 
+		// $this->view->setVar("page", $page);
 	}
 
 	public function pageAction()
@@ -27,7 +28,7 @@ class GameController extends ControllerBase
 		$options = Option::find(['conditions' => ["page_id = {$id}"]]);
 		// print_r($page->options);
 		// exit('23');
-		$this->view->setVar("page", $page); 
-		$this->view->setVar("options", $options); 
+		$this->view->setVar("page", $page);
+		$this->view->setVar("options", $options);
 	}
 }

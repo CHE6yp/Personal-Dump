@@ -5,6 +5,7 @@ class NamesController extends ControllerBase
 
 	public function initialize()
 	{
+		parent::initialize();
 		$this->view->setVar('title', "Генератор Имен");
 		$this->view->setVar('h1', "Генератор Имен");
 	}
@@ -17,7 +18,7 @@ class NamesController extends ControllerBase
 	public function generateAction()
 	{
 		$text = $this->request->getPost('names');
-		$names = mb_strtolower($text); 
+		$names = mb_strtolower($text);
 		$names = explode(' ', $names);
 		foreach ($names as $key => $value) {
 			$namesBit[$key] = $this->mbStringToArray($value);
@@ -59,7 +60,7 @@ class NamesController extends ControllerBase
 			'я'     => []
 		];
 
-		foreach ($countArray as $key => $value) 
+		foreach ($countArray as $key => $value)
 		{
 
 			$countArray[$key] = [
@@ -99,10 +100,10 @@ class NamesController extends ControllerBase
 				'end'   => '0'
 			];
 		}
-		
-		foreach ($namesBit as $name) 
+
+		foreach ($namesBit as $name)
 		{
-			foreach ($name as $key => $symbol) 
+			foreach ($name as $key => $symbol)
 			{
 
 				if ($key == 0)
@@ -136,11 +137,11 @@ class NamesController extends ControllerBase
 	{
 		$chanceArr = [];
 		$count = 0;
-		foreach ($countArray[$char] as $key => $value) 
+		foreach ($countArray[$char] as $key => $value)
 		{
 			$count += $value;
 			if ($value!=0)
-				for ($i=0; $i < $value; $i++) 
+				for ($i=0; $i < $value; $i++)
 					$chanceArr[] = $key;
 		}
 

@@ -27,7 +27,10 @@ class ControllerBase extends Controller
 	{
 		$this->view->setVar('title', "CHE6yp");
 		$this->view->setVar('h1', "Главная");
-		$this->view->setVar('authUser', self::$authUser);
+
+		$sessions = $this->getDI()->getShared("session");
+		if ($sessions->get('authUser'));
+			$this->view->setVar('authUser', $sessions->get('authUser'));
 	}
 
 	public function jsonResult($data)
