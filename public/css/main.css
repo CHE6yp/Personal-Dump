@@ -14,15 +14,31 @@ header
 }
 h1
 {
-	font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+	/*font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;*/
+	font-family: 'Pacifico', cursive;
 	display:inline;
 	color: #fff;
 }
 a.logo, a.logo:visited
 {
 	font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+	font-family: 'Pacifico', cursive;
 	font-size: 24px;
 	color: #1496E1;
+	text-decoration: none;
+}
+.userHeader
+{
+	font-family: 'Pacifico', cursive;
+	font-size: 24px;
+	color: #1496E1;
+	text-decoration: none;
+}
+.logoutHeader
+{
+	font-family: 'Pacifico', cursive;
+	font-size: 20px;
+	color: #f66;
 	text-decoration: none;
 }
 article
