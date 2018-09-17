@@ -27,6 +27,12 @@ class VideoController extends ControllerBase
 			$this->view->setVar('video', "WOW.mp4");
 		if ($id == 4)
 			$this->view->setVar('video', "bohemian rhapsody.mp4");
+		if ($id == 5)
+			$this->view->setVar('video', "atoms for peace - Ingenue cover.mp4");
+		if ($id == 6)
+			$this->view->setVar('video', "this is how you find peace.mp4");
+		if ($id == 7)
+			$this->view->setVar('video', "Good clean fun.mp4");
 	}
 
 
