@@ -11,6 +11,7 @@
 			Your browser does not support the video element.
 			</video>
 		</div>
+		<input type="checkbox" id="replayBox">Replay
 
 	</article>
 	<script type="text/javascript" src="/js/video.js"></script>
