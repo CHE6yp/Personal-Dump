@@ -6,12 +6,12 @@
 		<a href="/video">Назад</a>
 		<h2>{{video}}</h2>
 		<div  >
-			<video width="500"  controls>
+			<video id="videoClip" width="500"  controls>
 				<source src="/Video/{{video}}" type="video/mp4">
-			Your browser does not support the audio element.
+			Your browser does not support the video element.
 			</video>
 		</div>
 
 	</article>
-
+	<script type="text/javascript" src="/js/video.js"></script>
 {% endblock %}
