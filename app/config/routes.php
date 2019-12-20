@@ -19,6 +19,30 @@ $router->add(
 		"id"     => 1
 	)
 );
+
+$router->add(
+	"/calendar/:int/:int/",
+	array(
+		"controller"	=> "calendar",
+		"action"		=> "index",
+		"year"			=> 1,
+		"month"			=> 2
+	)
+);
+
+$router->add(
+	"/calendar/saveDay/:int/:int/:int/:params/",
+	array(
+		"controller"	=> "calendar",
+		"action"		=> "saveDay",
+		"year"			=> 1,
+		"month"			=> 2,
+		"day"			=> 3,
+		"comment"		=> 4
+	)
+);
+
+
 // $router->add(
 // 	"/game/:int/",
 // 	array(
