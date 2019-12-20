@@ -14,9 +14,9 @@ $router = new \Phalcon\Mvc\Router();
 $router->add(
 	"/game/:int/",
 	array(
-		"controller" => "game",
-		"action"     => "page",
-		"id"     => 1
+		"controller"	=> "game",
+		"action"		=> "page",
+		"id"			=> 1
 	)
 );
 
@@ -31,7 +31,7 @@ $router->add(
 );
 
 $router->add(
-	"/calendar/saveDay/:int/:int/:int/:params/",
+	"/calendar/saveDay/:int/:int/:int:params/",
 	array(
 		"controller"	=> "calendar",
 		"action"		=> "saveDay",

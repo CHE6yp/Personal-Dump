@@ -2,7 +2,10 @@
 
 {% block content %}
 	<article>
-		{{date}}
+	{% set prev = (month == 1) ? (year-1)~"/12/" : (year)~"/"~(month-1)~"/" %}
+	{% set next = (month == 12) ? (year+1)~"/1/" : (year)~"/"~(month+1)~"/" %}
+
+	<a href="/calendar/{{prev}}"><</a> {{year}} {{month}} <a href="/calendar/{{next}}">></a>
 	</article>
 	{% for day, comment in days %}
 	    
@@ -13,10 +16,12 @@
 
 
 	<script type="text/javascript">
-	function saveDay(year,month,day,comment)
+	function saveDay(year, month, day, comment)
 	{
+		url = "/calendar/saveDay/"+year+"/"+month+"/"+day+"/"+comment+"/";
+		console.log(url);
 		$.ajax({
-			url: "/calendar/saveDay/"+year+"/"+month+"/"+day+"/"+comment+"/",
+			url: url,
 /*				beforeSend: function( xhr ) {
 				xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
 			}*/	

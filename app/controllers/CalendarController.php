@@ -38,15 +38,14 @@ class CalendarController extends ControllerBase
 		$this->view->setVar('days', $daysArr);
 	}
 
-	public function saveDayAction(int $year,int $month, int $day, $comment)
+	public function saveDayAction(int $year,int $month, int $day, string $comment)
 	{
 		$dayRecord = Days::findFirst([
 			'conditions'=>'year = :year: AND month = :month: AND day = :day:',
 			'bind'=>['year'=>$year, 'month'=>$month, 'day'=>$day]
 		]);
-
+		echo $comment;
 		if (!$dayRecord) {
-			echo "new record";
 			$dayRecord = new Days();
 
 			$dayRecord->year = $year;

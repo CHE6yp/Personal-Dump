@@ -11,6 +11,7 @@
 		<p><a href="/vue/">Vue.js playground</a></p>
 		<p><a href="/text/">texts</a></p>
 		<p><a href="/files/">files</a></p>
+		<p><a href="/calendar/">calendar</a></p>
 		{% if authUser %}
 		Уау, ты залогинен.
 		<p>Чето чето арвадалта <a href="family/one/1?d=8">СЮДА</a>.</p>
