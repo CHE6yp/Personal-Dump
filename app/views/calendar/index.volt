@@ -7,12 +7,20 @@
 
 	<a href="/calendar/{{prev}}"><</a> {{year}} {{month}} <a href="/calendar/{{next}}">></a>
 	</article>
-	{% for day, comment in days %}
+	<div class="container">
+		<div class="row">
+		{% for day, comment in days %}
+			<div class="col-sm" style="margin:3px ">
+			    <span style="font-weight:bold; color:#aa2;">{{day+1}} </span><br>
+			    <input  type="text" name="comment" onchange="saveDay({{year}},{{month}},{{day+1}},value)" value='{{comment}}'>
+		    </div>
+
+		{% endfor %}
+	  
 	    
-	    <span>{{day+1}} </span>
-	    <input type="text" name="comment" onchange="saveDay({{year}},{{month}},{{day+1}},value)" value='{{comment}}'>
-	    <br>
-	{% endfor %}
+	  	</div>
+	</div>
+	
 
 
 	<script type="text/javascript">
