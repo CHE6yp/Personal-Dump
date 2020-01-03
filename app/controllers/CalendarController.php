@@ -31,11 +31,18 @@ class CalendarController extends ControllerBase
 			'conditions'=>'year = :year: AND month = :month:',
 			'bind'=>['year'=>$year, 'month'=>$month]
 		]);
+		$all = 0;
 		foreach ($dayRecord as $value) {
 			$daysArr[$value->day-1] = $value->comment;
+			$all += floatval($value->comment); 
+			print_r($value->comment);echo "<br>";
 		}
+		print_r($dayRecord->count());
+		$average = $all/$dayRecord->count();
 
 		$this->view->setVar('days', $daysArr);
+		$this->view->setVar('all', $all);
+		$this->view->setVar('average', $average);
 	}
 
 	public function saveDayAction(int $year,int $month, int $day, string $comment)

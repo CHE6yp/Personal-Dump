@@ -5,7 +5,9 @@
 	{% set prev = (month == 1) ? (year-1)~"/12/" : (year)~"/"~(month-1)~"/" %}
 	{% set next = (month == 12) ? (year+1)~"/1/" : (year)~"/"~(month+1)~"/" %}
 
-	<a href="/calendar/{{prev}}"><</a> {{year}} {{month}} <a href="/calendar/{{next}}">></a>
+	<a href="/calendar/{{prev}}"><</a> {{year}} {{month}} <a href="/calendar/{{next}}">></a><br>
+	<span>Общее количество сигарет - <b>{{all}}</b></span><br>
+	<span>Сигарет в среднем - <b>{{average}}</b></span>
 	</article>
 	<div class="container">
 		<div class="row">
