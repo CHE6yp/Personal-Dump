@@ -74,4 +74,17 @@ class CalendarController extends ControllerBase
 		    echo 'Great, a new dayRecord was saved successfully!';
 		}
 	}
+
+	public function getDayAction(int $year,int $month, int $day)
+	{
+		$dayRecord = Days::findFirst([
+			'conditions'=>'year = :year: AND month = :month: AND day = :day:',
+			'bind'=>['year'=>$year, 'month'=>$month, 'day'=>$day]
+		]);
+		if (!$dayRecord) {
+			echo '0';
+		}
+		else
+			echo $dayRecord->comment;
+	}
 }
