@@ -14,7 +14,8 @@
 		{% for day, comment in days %}
 			<div class="col-sm" style="margin:3px ">
 			    <span style="font-weight:bold; color:#aa2;">{{day+1}} </span><br>
-			    <input  type="text" name="comment" onchange="saveDay({{year}},{{month}},{{day+1}},value)" value='{{comment}}'>
+			    <input  type="text" name="comment" onchange="saveDay({{year}},{{month}},{{day+1}},value)" value='{{comment}}' 
+			    {{(authUser)?'':'disabled'}}>
 		    </div>
 
 		{% endfor %}
