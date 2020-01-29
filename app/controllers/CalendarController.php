@@ -47,8 +47,9 @@ class CalendarController extends ControllerBase
 
 	public function saveDayAction(int $year,int $month, int $day, string $comment)
 	{
-		if ($this->getDI()->getShared("session")->get('authUser')==false)
-			return "Not authorised";
+		// это верну, когда разберусь как с токенами работать
+		// if ($this->getDI()->getShared("session")->get('authUser')==false)
+		// 	return "Not authorised";
 		$dayRecord = Days::findFirst([
 			'conditions'=>'year = :year: AND month = :month: AND day = :day:',
 			'bind'=>['year'=>$year, 'month'=>$month, 'day'=>$day]
