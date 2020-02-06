@@ -60,8 +60,6 @@ class AuthController extends ControllerBase
                 "conditions" => "username = '".$username."' AND password = '".$password."'"
             ]);
 
-            var_dump($this->security->hash($password));die;
-
             if (false === $user) {
                 $this->flashSession->error("wrong user / password");
             } else {
