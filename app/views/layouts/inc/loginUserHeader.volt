@@ -1,4 +1,4 @@
-<span>
+<span class="float-right">
 	{% if authUser == null %}
 		<a class="logo" href="/auth/login/"> Login</a>
 	{% else %}

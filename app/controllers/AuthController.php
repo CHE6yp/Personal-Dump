@@ -47,14 +47,20 @@ class AuthController extends ControllerBase
                 return $this->view->pick("login");
             }
 
+            //for some fucking reason, binding results in $user never being false
+            // $user = Users::findFirst([
+            //     "conditions" => "username = ?0 AND password = ?1",
+            //     "bind" == [
+            //         0 => $username,
+            //         // 1 => $this->security->hash($password)
+            //         1 => $password
+            //     ]
+            // ]);
             $user = Users::findFirst([
-                "conditions" => "username = ?0 AND password = ?1",
-                "bind" == [
-                    0 => $username,
-                    // 1 => $this->security->hash($password)
-                    1 => $password
-                ]
+                "conditions" => "username = '".$username."' AND password = '".$password."'"
             ]);
+
+            var_dump($this->security->hash($password));die;
 
             if (false === $user) {
                 $this->flashSession->error("wrong user / password");

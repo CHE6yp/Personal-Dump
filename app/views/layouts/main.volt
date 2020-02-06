@@ -19,9 +19,9 @@
 
 	</head>
 	<body>
-		<header>
-			<a class="logo" href="/" >Personal Dump</a>
-			<h1>{{h1}}</h1>
+		<header class="clearfix">
+			<a class="logo float-left" href="/" >Personal Dump</a>
+			<h1 class="centered">{{h1}}</h1>
 			{% include "layouts/inc/loginUserHeader.volt" %}
 		</header>
 
