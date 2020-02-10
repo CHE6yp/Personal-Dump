@@ -19,13 +19,15 @@
 
 	</head>
 	<body>
-		<header class="clearfix">
-			<a class="logo float-left" href="/" >Personal Dump</a>
-			<h1 class="centered">{{h1}}</h1>
+		<header class="row align-items-center ">
+			<div class="container col-sm">
+				<a class="logo" href="/" >Personal Dump</a>
+			</div>
+			<h1 class="col-sm text-center">{{h1}}</h1>
 			{% include "layouts/inc/loginUserHeader.volt" %}
 		</header>
 
-		<div class="content">
+		<div class="content container text-center">
 			{% block content %}
 			{% endblock %}
 		</div>

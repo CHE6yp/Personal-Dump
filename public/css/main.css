@@ -1,49 +1,49 @@
 body
 {
-	margin: 0px;
+	/*margin: 0px;*/
 }
 header
 {
-	padding: 0 20px;
+	/*padding: 0 20px;*/
 	background-color: #292b2c;
 	color: #fff;
-	height: 60px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	/*height: 60px;*/
+	/*display: flex;*/
+	/*justify-content: space-between;*/
+	/*align-items: center;*/
 }
 h1
 {
 	/*font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;*/
 	font-family: 'Pacifico', cursive;
-	display:inline;
+	/*display:inline;*/
 	color: #fff;
 }
 a.logo, a.logo:visited
 {
 	font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 	font-family: 'Pacifico', cursive;
-	font-size: 24px;
+	/*font-size: 24px;*/
 	color: #1496E1;
 	text-decoration: none;
 }
 .userHeader
 {
 	font-family: 'Pacifico', cursive;
-	font-size: 24px;
+	/*font-size: 24px;*/
 	color: #1496E1;
 	text-decoration: none;
 }
 .logoutHeader
 {
 	font-family: 'Pacifico', cursive;
-	font-size: 20px;
+	/*font-size: 20px;*/
 	color: #f66;
 	text-decoration: none;
 }
 article
 {
-	padding-left: 30px;
+	/*padding-left: 30px;*/
 }
 form.add-track
 {
