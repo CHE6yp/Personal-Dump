@@ -137,7 +137,8 @@ class FamilyController extends ControllerBase
 	public function treeAction(int $limit = 14)
 	{
 		//$id = $this->request->get('id');
-		$people = Person::find();
+		$people = Person::find(['order' => 'id DESC']);
+		//$people = Person::findFirst(1)->getRelativeRecursive(3);
 		if (!$people)
 			exit ('NO people');
 
