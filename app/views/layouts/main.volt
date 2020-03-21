@@ -21,13 +21,13 @@
 	<body>
 		<header class="row align-items-center ">
 			<div class="container col-sm">
-				<a class="logo" href="/" >Personal Dump</a>
+				<a class="logo pl-5" href="/" >Personal Dump</a>
 			</div>
 			<h1 class="col-sm text-center">{{h1}}</h1>
 			{% include "layouts/inc/loginUserHeader.volt" %}
 		</header>
 
-		<div class="content container text-center">
+		<div class="content container text-center pt-5">
 			{% block content %}
 			{% endblock %}
 		</div>
