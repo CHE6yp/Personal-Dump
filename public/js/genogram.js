@@ -12,152 +12,32 @@ function init() {
         nodeSelectionAdornmentTemplate:
           $(go.Adornment, "Auto",
             { layerName: "Grid" },  // the predefined layer that is behind everything else
-            $(go.Shape, "Circle", { fill: "#c1cee3", stroke: null }),
+            $(go.Shape, "Square", { fill: "#c1cee3", stroke: null }),
             $(go.Placeholder, { margin: 2 })
           ),
         layout:  // use a custom layout, defined below
           $(GenogramLayout, { direction: 90, layerSpacing: 30, columnSpacing: 10 })
       });
-
-  // determine the color for each attribute shape
-  function attrFill(a) {
-    switch (a) {
-      case "A": return "#00af54"; // green
-      case "B": return "#f27935"; // orange
-      case "C": return "#d4071c"; // red
-      case "D": return "#70bdc2"; // cyan
-      case "E": return "#fcf384"; // gold
-      case "F": return "#e69aaf"; // pink
-      case "G": return "#08488f"; // blue
-      case "H": return "#866310"; // brown
-      case "I": return "#9270c2"; // purple
-      case "J": return "#a3cf62"; // chartreuse
-      case "K": return "#91a4c2"; // lightgray bluish
-      case "L": return "#af70c2"; // magenta
-      case "S": return "#d4071c"; // red
-      default: return "transparent";
-    }
-  }
-
-  // determine the geometry for each attribute shape in a male;
-  // except for the slash these are all squares at each of the four corners of the overall square
-  var tlsq = go.Geometry.parse("F M1 1 l19 0 0 19 -19 0z");
-  var trsq = go.Geometry.parse("F M20 1 l19 0 0 19 -19 0z");
-  var brsq = go.Geometry.parse("F M20 20 l19 0 0 19 -19 0z");
-  var blsq = go.Geometry.parse("F M1 20 l19 0 0 19 -19 0z");
-  var slash = go.Geometry.parse("F M38 0 L40 0 40 2 2 40 0 40 0 38z");
-  function maleGeometry(a) {
-    switch (a) {
-      case "A": return tlsq;
-      case "B": return tlsq;
-      case "C": return tlsq;
-      case "D": return trsq;
-      case "E": return trsq;
-      case "F": return trsq;
-      case "G": return brsq;
-      case "H": return brsq;
-      case "I": return brsq;
-      case "J": return blsq;
-      case "K": return blsq;
-      case "L": return blsq;
-      case "S": return slash;
-      default: return tlsq;
-    }
-  }
-
-  // determine the geometry for each attribute shape in a female;
-  // except for the slash these are all pie shapes at each of the four quadrants of the overall circle
-  var tlarc = go.Geometry.parse("F M20 20 B 180 90 20 20 19 19 z");
-  var trarc = go.Geometry.parse("F M20 20 B 270 90 20 20 19 19 z");
-  var brarc = go.Geometry.parse("F M20 20 B 0 90 20 20 19 19 z");
-  var blarc = go.Geometry.parse("F M20 20 B 90 90 20 20 19 19 z");
-  function femaleGeometry(a) {
-    switch (a) {
-      case "A": return tlarc;
-      case "B": return tlarc;
-      case "C": return tlarc;
-      case "D": return trarc;
-      case "E": return trarc;
-      case "F": return trarc;
-      case "G": return brarc;
-      case "H": return brarc;
-      case "I": return brarc;
-      case "J": return blarc;
-      case "K": return blarc;
-      case "L": return blarc;
-      case "S": return slash;
-      default: return tlarc;
-    }
-  }
-
-
-  // two different node templates, one for each sex,
-  // named by the category value in the node data object
-  myDiagram.nodeTemplateMap.add("M",  // male
-    $(go.Node, "Vertical",
-      { locationSpot: go.Spot.Center, locationObjectName: "ICON", selectionObjectName: "ICON" },
-      $(go.Panel,
-        { name: "ICON" },
-        $(go.Shape, "Square",
-          { width: 40, height: 40, strokeWidth: 2, fill: "white", stroke: "#919191", portId: "" }),
-        $(go.Panel,
-          { // for each attribute show a Shape at a particular place in the overall square
-            itemTemplate:
-              $(go.Panel,
-                $(go.Shape,
-                  { stroke: null, strokeWidth: 0 },
-                  new go.Binding("fill", "", attrFill),
-                  new go.Binding("geometry", "", maleGeometry))
-              ),
-            margin: 1
-          },
-          new go.Binding("itemArray", "a")
-        ),
-        $(go.Picture,
-          // Pictures should normally have an explicit width and height.
-          // This picture has a red background, only visible when there is no source set
-          // or when the image is partially transparent.
-          { margin: 10, width: 50, height: 50, background: "red" },
-          // Picture.source is data bound to the "source" attribute of the model data
-          new go.Binding("source")),
-      ),
-      $(go.TextBlock,
-        { textAlign: "center", maxSize: new go.Size(80, NaN) },
-        new go.Binding("text", "n"))
-    ));
-
-  myDiagram.nodeTemplateMap.add("F",  // female
-    $(go.Node, "Vertical",
-      { locationSpot: go.Spot.Center, locationObjectName: "ICON", selectionObjectName: "ICON" },
-      $(go.Panel,
-        { name: "ICON" },
-        $(go.Shape, "Circle",
-          { width: 60, height: 40, strokeWidth: 2, fill: "white", stroke: "#a1a1a1", portId: "" }),
-        $(go.Panel,
-          { // for each attribute show a Shape at a particular place in the overall circle
-            itemTemplate:
-              $(go.Panel,
-                $(go.Shape,
-                  { stroke: null, strokeWidth: 0 },
-                  new go.Binding("fill", "", attrFill),
-                  new go.Binding("geometry", "", femaleGeometry))
-              ),
-            margin: 1
-          },
-          new go.Binding("itemArray", "a")
-          ),
-          $(go.Picture,
-            // Pictures should normally have an explicit width and height.
-            // This picture has a red background, only visible when there is no source set
-            // or when the image is partially transparent.
-            { margin: 10, width: 50, height: 50, background: "red" },
-            // Picture.source is data bound to the "source" attribute of the model data
-            new go.Binding("source")),
-      ),
-      $(go.TextBlock,
-        { textAlign: "center", maxSize: new go.Size(80, NaN) },
-        new go.Binding("text", "n"))
-    ));
+  
+// define a simple Node template
+myDiagram.nodeTemplate =
+  $(go.Node, "Vertical",
+    // the entire node will have a light-blue background
+    { background: "#44CCFF" },
+    $(go.Picture,
+      // Pictures should normally have an explicit width and height.
+      // This picture has a red background, only visible when there is no source set
+      // or when the image is partially transparent.
+      { margin: 10, width: 50, height: 50, background: "red" },
+      // Picture.source is data bound to the "source" attribute of the model data
+      new go.Binding("source")),
+    $(go.TextBlock,
+      "Default Text",  // the initial value for TextBlock.text
+      // some room around the text, a larger font, and a white stroke:
+      { margin: 12, stroke: "white", font: "bold 16px sans-serif" },
+      // TextBlock.text is data bound to the "name" attribute of the model data
+      new go.Binding("text", "name"))
+  );
 
   // the representation of each label node -- nothing shows on a Marriage Link
   myDiagram.nodeTemplateMap.add("LinkLabel",
