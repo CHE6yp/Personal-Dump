@@ -18,42 +18,6 @@ class Person extends ModelBase
 			'id',
 			['alias' => 'parents']
 		);
-
-		$this->hasManyToMany(
-			"id",
-			"ChildToParent",
-			'parent',
-			"child",
-			'Person',
-			'id',
-			['alias' => 'children']
-		);
-
-		// $this->hasOne(
-  //            'id',
-  //            "ChildToParent",
-  //            'parent',
-  //            [
-  //                'reusable' => true, // cache related data
-  //                'alias'    => 'mechanicalParts',
-  //                'params'   => [
-  //                    'conditions' => 'robotTypeId = :type:',
-  //                    'bind'       => [
-  //                        'type' => 4,
-  //                    ]
-  //                ]
-  //            ]
-  //        );
-	}
-
-	public function getTree()
-	{
-		if(!empty($this->parents))
-			$parents = $this->parents->getTree();
-		else
-			$parents = [];
-
-		return $parents;
 	}
 
 	public function getParentArr()
@@ -69,25 +33,23 @@ class Person extends ModelBase
 		return $parents;
 	}
 
-	public function getChildrenArr()
-	{
-		if(empty($this->children))
-			return [];
-
-		$children = [];
-
-		foreach ($this->children as $child)
-			$children[] = $child;
-
-		return $children;
-	}
-
 	public function getPicture()
 	{
 		if (file_exists("/var/www/html/public/images/people/{$this->id}.jpg"))
 			return "/images/people/{$this->id}.jpg";
 		else
 			return "/images/people/person-placeholder.jpg";
+	}
+
+	public function getChildren()
+	{
+		$children = Person::find([
+	        'conditions' => 'father = :id: OR mother = :id:', 
+	        'bind'       => [
+	            'id' => $this->id,
+	        ]
+	    ]);
+		return $children;
 	}
 
 	public function getRelativeRecursive($depth,$count = 0)
@@ -107,8 +69,8 @@ class Person extends ModelBase
 				$p->level = $this->level + 1;
 			}
 		}
-		if(!empty($this->children)){
-			$children = $this->getChildrenArr();
+		if(!empty($this->getChildren())){
+			$children = $this->getChildren();
 			foreach ($children as $c)
 			{
 				$c->level = $this->level - 1;

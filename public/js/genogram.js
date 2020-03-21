@@ -54,6 +54,13 @@ myDiagram.nodeTemplate =
       // TextBlock.text is data bound to the "name" attribute of the model data
       new go.Binding("text", "surname")
     ),
+    $(go.TextBlock,
+      " ",  // the initial value for TextBlock.text
+      // some room around the text, a larger font, and a white stroke:
+      { margin: 6, stroke: "white", font: "bold 16px sans-serif" },
+      // TextBlock.text is data bound to the "name" attribute of the model data
+      new go.Binding("text", "birthday")
+    ),
     // the expand/collapse button, at the top-right corner
     $("TreeExpanderButton",
       {

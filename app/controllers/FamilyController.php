@@ -14,27 +14,6 @@ class FamilyController extends ControllerBase
 	public function indexAction()
 	{
 
-		// $page = Page::findFirstById($id);
-		// if (!$page)
-		// 	exit ('NO PAGE!');
-		// $this->view->setVar("page", $page);
-	}
-
-	public function personAction($id = false)
-	{
-		if(!$id)
-			return false;
-
-		$person = Person::findFirstById($id);
-
-		if(!$person)
-			return false;
-
-		echo '<pre>';
-		print_r($person->parents->toArray());
-		print_r($person->parents[0]->parents->toArray());
-		echo '</pre>';
-		exit;
 	}
 
 	public function addPersonAction()
@@ -64,7 +43,7 @@ class FamilyController extends ControllerBase
 		}
 
 		$response = new Response();
-		return $response->redirect("/family/one/1?d=8");
+		return $response->redirect("/family/tree/60");
 
 	}
 
@@ -113,7 +92,7 @@ class FamilyController extends ControllerBase
 		$father = Person::findFirstById($person->father);
 		$mother = Person::findFirstById($person->mother);
 
-		$children = $person->getChildrenArr();
+		$children = $person->getChildren();
 
 		$childrenByParents = [];
 		if ($children!=[])
@@ -172,6 +151,7 @@ class FamilyController extends ControllerBase
 			// "s"	=> "gender",
 			"m"	=> "mother",
 			"f"	=> "father",
+			"birthday"	=> "birthdate"
 		];
 		$i = 0;
 		foreach ($people as $key =>$person)
@@ -185,22 +165,24 @@ class FamilyController extends ControllerBase
 					$personArr->$k = $person->$v;
 			}
 			$personArr->s = strtoupper($person->gender);
-			if ($person->gender == 'm' && ($person->children->getFirst()->mother!==null))
+			if ($person->gender == 'm' && ($person->getChildren()->getFirst()->mother!==null))
 			{	
-				foreach ($person->children as $child) {
+				foreach ($person->getChildren() as $child) {
 					# code...
 					$personArr->ux[] = $child->mother;
 					$personArr->ux = array_unique ($personArr->ux);
 				}
 			}
-			else if ($person->gender == 'f' && ($person->children->getFirst()->father!==null))
+			else if ($person->gender == 'f' && ($person->getChildren()->getFirst()->father!==null))
 			{	
-				foreach ($person->children as $child) {
+				foreach ($person->getChildren() as $child) {
 					# code...
 					$personArr->vir[] = $child->father;
 					$personArr->vir = array_unique ($personArr->vir);
 				}
 			}
+
+			$personArr->children = $person->getChildren();
 
 			$personArr->source = $person->getPicture();
 			$personArr->bcg = ($person->gender == 'f')? '#eb4034':'#4CF';
@@ -210,5 +192,12 @@ class FamilyController extends ControllerBase
 
 		$this->view->setVar("people", json_encode($peopleArr, JSON_PRETTY_PRINT));
 		//$this->jsonResult($people);
+
+
+		$males = Person::find(["conditions" => "gender = 'm'"]);
+		$females = Person::find(["conditions" => "gender = 'f'"]);
+
+		$this->view->setVar("males", $males);
+		$this->view->setVar("females", $females);
 	}
 }
