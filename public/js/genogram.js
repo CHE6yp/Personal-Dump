@@ -112,7 +112,14 @@ function init() {
             margin: 1
           },
           new go.Binding("itemArray", "a")
-        )
+        ),
+        $(go.Picture,
+          // Pictures should normally have an explicit width and height.
+          // This picture has a red background, only visible when there is no source set
+          // or when the image is partially transparent.
+          { margin: 10, width: 50, height: 50, background: "red" },
+          // Picture.source is data bound to the "source" attribute of the model data
+          new go.Binding("source")),
       ),
       $(go.TextBlock,
         { textAlign: "center", maxSize: new go.Size(80, NaN) },
@@ -125,7 +132,7 @@ function init() {
       $(go.Panel,
         { name: "ICON" },
         $(go.Shape, "Circle",
-          { width: 40, height: 40, strokeWidth: 2, fill: "white", stroke: "#a1a1a1", portId: "" }),
+          { width: 60, height: 40, strokeWidth: 2, fill: "white", stroke: "#a1a1a1", portId: "" }),
         $(go.Panel,
           { // for each attribute show a Shape at a particular place in the overall circle
             itemTemplate:
@@ -138,7 +145,14 @@ function init() {
             margin: 1
           },
           new go.Binding("itemArray", "a")
-        )
+          ),
+          $(go.Picture,
+            // Pictures should normally have an explicit width and height.
+            // This picture has a red background, only visible when there is no source set
+            // or when the image is partially transparent.
+            { margin: 10, width: 50, height: 50, background: "red" },
+            // Picture.source is data bound to the "source" attribute of the model data
+            new go.Binding("source")),
       ),
       $(go.TextBlock,
         { textAlign: "center", maxSize: new go.Size(80, NaN) },

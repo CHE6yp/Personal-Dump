@@ -188,8 +188,8 @@ class FamilyController extends ControllerBase
 				$personArr->ux = $person->children->getFirst()->mother;
 			else if ($person->gender == 'f' && ($person->children->getFirst()->father!==null))
 				$personArr->vir = $person->children->getFirst()->father;
-			$personArr->a = ["C", "F", "K"];
-
+			$personArr->a = ["G", "F", "C", "D"];
+			$personArr->source = $person->getPicture();
 			$peopleArr[] = $personArr;
 		}
 
