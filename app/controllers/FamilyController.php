@@ -134,13 +134,18 @@ class FamilyController extends ControllerBase
 	}
 
 	//при лимите 14 особо не ломается логика джса
-	public function treeAction(int $limit = 14)
+	public function treeAction(int $depth = 0)
 	{
 		//$id = $this->request->get('id');
 		$people = Person::find(['order' => 'id DESC']);
-		//$people = Person::findFirst(1)->getRelativeRecursive(3);
+		//$people = Person::findFirst(1)->getRec($depth);
+		//var_dump(Person::findFirst(1)->getRec(0));
+		//var_dump($people);die;
 		if (!$people)
 			exit ('NO people');
+
+		
+		// die;
 
 		$peopleArr = [];
 		//{ key: 0, n: "Aaron", s: "M", m:-10, f:-11, ux: 1, a: ["C", "F", "K"] },
@@ -157,8 +162,8 @@ class FamilyController extends ControllerBase
 		$i = 0;
 		foreach ($people as $key =>$person)
 		{
-			$i++;
-			if ($i>$limit) continue;
+			// $i++;
+			// if ($i>$limit) continue;
 			$personArr = new \stdClass;
 
 			foreach ($kvPair as $k => $v) {
@@ -166,7 +171,7 @@ class FamilyController extends ControllerBase
 					$personArr->$k = $person->$v;
 			}
 			$personArr->s = strtoupper($person->gender);
-			if ($person->gender == 'm' && ($person->getChildren()->getFirst()->mother!==null))
+			if ($person->gender == 'm')
 			{	
 				foreach ($person->getChildren() as $child) {
 					# code...
@@ -174,7 +179,7 @@ class FamilyController extends ControllerBase
 					$personArr->ux = array_unique ($personArr->ux);
 				}
 			}
-			else if ($person->gender == 'f' && ($person->getChildren()->getFirst()->father!==null))
+			else if ($person->gender == 'f' )
 			{	
 				foreach ($person->getChildren() as $child) {
 					# code...
@@ -189,6 +194,12 @@ class FamilyController extends ControllerBase
 			$personArr->bcg = ($person->gender == 'f')? '#eb4034':'#4CF';
 			$peopleArr[] = $personArr;
 		}
+
+		// foreach ($peopleArr as $p) {
+		// 	//echo( "$p->key $p->name $p->surname - $p->f $p->m ".var_dump($p->vir).var_dump( $p->ux)." <br>");
+		// 	var_dump(json_encode($p).'<br>');
+		// }
+		// die;
 
 
 		$this->view->setVar("people", json_encode($peopleArr, JSON_PRETTY_PRINT));

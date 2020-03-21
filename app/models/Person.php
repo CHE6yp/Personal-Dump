@@ -20,14 +20,23 @@ class Person extends ModelBase
 		);
 	}
 
+	public function getParents()
+	{
+		$res = [Person::findFirst($this->father), Person::findFirst($this->mother)]; //this var_dumps values
+		//var_dump($res);
+
+		//$res = Person::find(['conditions' => "father = $this->id or mother = $this->id",
+							//'hydration' => ResultSet::HYDRATE_ARRAYS]);
+		//var_dump($res);
+		return $res; //this returns NULL. WHY?!
+	}
+
 	public function getParentArr()
 	{
-		if(empty($this->parents))
-			return [];
 
 		$parents = [];
 
-		foreach ($this->parents as $parent)
+		foreach ([Person::findFirst($this->father), Person::findFirst($this->mother)] as $parent)
 			$parents[] = $parent;
 
 		return $parents;
@@ -43,13 +52,47 @@ class Person extends ModelBase
 
 	public function getChildren()
 	{
-		$children = Person::find([
-	        'conditions' => 'father = :id: OR mother = :id:', 
-	        'bind'       => [
-	            'id' => $this->id,
-	        ]
-	    ]);
-		return $children;
+		//var_dump($this->id);
+		$children = ($this->gender=="m")? 
+			Person::find(['conditions' => "father = $this->id"]) : 
+			Person::find(['conditions' => "mother = $this->id"]);
+	    //var_dump($children->toArray());
+		$result = [];
+		foreach ($children as $child) {
+			$result[] = $child;
+		}
+		return $result;
+	}
+
+	public function getRec($depth, $count = 0)
+	{
+		
+		$thisParents = $this->getParents();
+		$siblings = [];
+		//var_dump($thisParents);
+		foreach ($thisParents as $parent) {
+			//var_dump($parent->getChildren());
+			//var_dump($parent);
+			$siblings=array_merge($siblings,$parent->getChildren());
+		}
+		$siblings = array_unique($siblings);
+		$parents = [];
+		foreach ($siblings as $sibling) {
+			$parents = array_merge($parents, $sibling->getParents());
+		}
+		//var_dump($parents);
+
+		$result = array_unique(array_merge($siblings, $parents));
+
+		if ($count<$depth){
+			$count++;
+			foreach ($result as $person) {
+				$result = array_unique(array_merge($result, $person->getRec($depth, $count)));
+			}
+		}
+
+		return $result;
+
 	}
 
 	public function getRelativeRecursive($depth,$count = 0)

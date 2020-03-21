@@ -45,7 +45,7 @@
 	<button type="submit">Add</button>
 	</form>
   <p></p>
-  <pre hidden id="peopleData">    {{people}}
+  <pre id="peopleData">    {{people}}
   </pre>
 </div>
 
