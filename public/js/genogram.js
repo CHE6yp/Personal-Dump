@@ -16,28 +16,64 @@ function init() {
             $(go.Placeholder, { margin: 2 })
           ),
         layout:  // use a custom layout, defined below
-          $(GenogramLayout, { direction: 90, layerSpacing: 30, columnSpacing: 10 })
+          $(GenogramLayout, { direction: 90, layerSpacing: 40, columnSpacing: 20 })
       });
   
 // define a simple Node template
 myDiagram.nodeTemplate =
   $(go.Node, "Vertical",
     // the entire node will have a light-blue background
-    { background: "#44CCFF" },
+    new go.Binding("background", "bcg"),
+    {width:100, height:200},
+    
+    $(go.TextBlock,
+      "id",  // the initial value for TextBlock.text
+      // some room around the text, a larger font, and a white stroke:
+      { margin: 6, stroke: "white", font: "bold 16px sans-serif" },
+      // TextBlock.text is data bound to the "name" attribute of the model data
+      new go.Binding("text", "key")
+    ),
     $(go.Picture,
       // Pictures should normally have an explicit width and height.
       // This picture has a red background, only visible when there is no source set
       // or when the image is partially transparent.
-      { margin: 10, width: 50, height: 50, background: "red" },
+      { margin: 3, width: 50, height: 50, background: "red" },
       // Picture.source is data bound to the "source" attribute of the model data
       new go.Binding("source")),
     $(go.TextBlock,
-      "Default Text",  // the initial value for TextBlock.text
+      "First Name",  // the initial value for TextBlock.text
       // some room around the text, a larger font, and a white stroke:
-      { margin: 12, stroke: "white", font: "bold 16px sans-serif" },
+      { margin: 6, stroke: "white", font: "bold 16px sans-serif" },
       // TextBlock.text is data bound to the "name" attribute of the model data
-      new go.Binding("text", "name"))
+      new go.Binding("text", "name")
+    ),
+    $(go.TextBlock,
+      "Last Name",  // the initial value for TextBlock.text
+      // some room around the text, a larger font, and a white stroke:
+      { margin: 6, stroke: "white", font: "bold 16px sans-serif" },
+      // TextBlock.text is data bound to the "name" attribute of the model data
+      new go.Binding("text", "surname")
+    ),
+    // the expand/collapse button, at the top-right corner
+    $("TreeExpanderButton",
+      {
+        name: 'TREEBUTTON',
+        width: 20, height: 20,
+        alignment: go.Spot.BottomRight,
+        alignmentFocus: go.Spot.Center,
+        // customize the expander behavior to
+        // create children if the node has never been expanded
+        click: function(e, obj) {  // OBJ is the Button
+          var node = obj.part;  // get the Node containing this Button
+          if (node === null) return;
+          e.handled = true;
+          alert(node);
+        }
+      }
+    ),  // end TreeExpanderButton
+
   );
+
 
   // the representation of each label node -- nothing shows on a Marriage Link
   myDiagram.nodeTemplateMap.add("LinkLabel",
@@ -224,10 +260,6 @@ GenogramLayout.prototype.add = function(net, coll, nonmemberonly) {
       // create vertex representing both husband and wife
       var vertex = net.addNode(node);
       // now define the vertex size to be big enough to hold both spouses
-      if (spouseB == null){
-        console.log(12);
-        continue;
-      }
       vertex.width = spouseA.actualBounds.width + this.spouseSpacing + spouseB.actualBounds.width;
       vertex.height = Math.max(spouseA.actualBounds.height, spouseB.actualBounds.height);
       vertex.focus = new go.Point(spouseA.actualBounds.width + this.spouseSpacing / 2, vertex.height / 2);

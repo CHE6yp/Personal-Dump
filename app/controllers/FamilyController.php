@@ -168,6 +168,7 @@ class FamilyController extends ControllerBase
 		$kvPair = [
 			"key"=>"id",
 			"name"	=> "name",
+			"surname" => "surname",
 			// "s"	=> "gender",
 			"m"	=> "mother",
 			"f"	=> "father",
@@ -185,11 +186,24 @@ class FamilyController extends ControllerBase
 			}
 			$personArr->s = strtoupper($person->gender);
 			if ($person->gender == 'm' && ($person->children->getFirst()->mother!==null))
-				$personArr->ux = $person->children->getFirst()->mother;
+			{	
+				foreach ($person->children as $child) {
+					# code...
+					$personArr->ux[] = $child->mother;
+					$personArr->ux = array_unique ($personArr->ux);
+				}
+			}
 			else if ($person->gender == 'f' && ($person->children->getFirst()->father!==null))
-				$personArr->vir = $person->children->getFirst()->father;
+			{	
+				foreach ($person->children as $child) {
+					# code...
+					$personArr->vir[] = $child->father;
+					$personArr->vir = array_unique ($personArr->vir);
+				}
+			}
 
 			$personArr->source = $person->getPicture();
+			$personArr->bcg = ($person->gender == 'f')? '#eb4034':'#4CF';
 			$peopleArr[] = $personArr;
 		}
 
