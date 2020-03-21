@@ -154,7 +154,8 @@ class FamilyController extends ControllerBase
 		$this->view->setVar("childrenByParents", $childrenByParents);
 	}
 
-	public function treeAction()
+	//при лимите 14 особо не ломается логика джса
+	public function treeAction(int $limit = 14)
 	{
 		//$id = $this->request->get('id');
 		$people = Person::find();
@@ -163,25 +164,37 @@ class FamilyController extends ControllerBase
 
 		$peopleArr = [];
 		//{ key: 0, n: "Aaron", s: "M", m:-10, f:-11, ux: 1, a: ["C", "F", "K"] },
+
+		$kvPair = [
+			"key"=>"id",
+			"n"	=> "name",
+			// "s"	=> "gender",
+			"m"	=> "mother",
+			"f"	=> "father",
+		];
+		$i = 0;
 		foreach ($people as $key =>$person)
 		{
+			$i++;
+			if ($i>$limit) continue;
 			$personArr = new \stdClass;
-			$personArr->key = $person->id;
-			$personArr->n = $person->name;
-			$personArr->s = $person->gender;
-			$personArr->m = $person->mother;
-			$personArr->f = $person->father;
-			if ($person->gender == 'm')
-				$personArr->ux = 2;
-			else
-				$personArr->vir = 3;
+
+			foreach ($kvPair as $k => $v) {
+				if ($person->$v!==null)
+					$personArr->$k = $person->$v;
+			}
+			$personArr->s = strtoupper($person->gender);
+			if ($person->gender == 'm' && ($person->children->getFirst()->mother!==null))
+				$personArr->ux = $person->children->getFirst()->mother;
+			else if ($person->gender == 'f' && ($person->children->getFirst()->father!==null))
+				$personArr->vir = $person->children->getFirst()->father;
 			$personArr->a = ["C", "F", "K"];
 
 			$peopleArr[] = $personArr;
 		}
 
 
-		$this->view->setVar("people", json_encode($peopleArr));
+		$this->view->setVar("people", json_encode($peopleArr, JSON_PRETTY_PRINT));
 		//$this->jsonResult($people);
 	}
 }

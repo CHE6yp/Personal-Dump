@@ -28,6 +28,22 @@ class Person extends ModelBase
 			'id',
 			['alias' => 'children']
 		);
+
+		// $this->hasOne(
+  //            'id',
+  //            "ChildToParent",
+  //            'parent',
+  //            [
+  //                'reusable' => true, // cache related data
+  //                'alias'    => 'mechanicalParts',
+  //                'params'   => [
+  //                    'conditions' => 'robotTypeId = :type:',
+  //                    'bind'       => [
+  //                        'type' => 4,
+  //                    ]
+  //                ]
+  //            ]
+  //        );
 	}
 
 	public function getTree()
@@ -116,5 +132,10 @@ class Person extends ModelBase
 
 	public function __toString() {
 		return $this->id;
+	}
+
+	public function getFullName()
+	{
+		return $this->name.' '.$this->surname;
 	}
 }
